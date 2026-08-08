@@ -4,6 +4,7 @@
   "description": "Pulse AI - Autonomous Academic Workload Density Auditor & Task Manager",
   "private": true,
   "scripts": {
+    "test": "node --test server/tests/agentCore.test.js client/src/utils/schedulerEngine.test.js",
     "build": "cd client && npm install && npm run build",
     "start": "node server/index.js",
     "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run dev\""

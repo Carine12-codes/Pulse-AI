@@ -199,9 +199,9 @@ export function generateExtensionEmailForBottleneck(bottleneck, primaryTask, cou
   const courseCode = course ? course.code : (primaryTask ? primaryTask.course_code : 'Course');
   const taskTitle = primaryTask ? primaryTask.title : 'Deliverable';
 
-  const dateStr = bottleneck ? bottleneck.date : new Date().toISOString().split('T')[0];
-  const totalHrs = bottleneck ? bottleneck.totalHours : 14.5;
-  const safeLimit = bottleneck ? bottleneck.capacityLimit : 7.0;
+  const dateStr = bottleneck && bottleneck.date ? bottleneck.date : new Date().toISOString().split('T')[0];
+  const totalHrs = bottleneck && typeof bottleneck.totalHours === 'number' ? bottleneck.totalHours : (bottleneck && typeof bottleneck.total_hours === 'number' ? bottleneck.total_hours : 14.5);
+  const safeLimit = bottleneck && typeof bottleneck.capacityLimit === 'number' ? bottleneck.capacityLimit : 7.0;
 
   const extDate = new Date(dateStr);
   extDate.setDate(extDate.getDate() + 2);
