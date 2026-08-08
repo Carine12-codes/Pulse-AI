@@ -4,8 +4,7 @@ import { inMemoryStore, isDbConnected, getPool } from './db.js';
 
 dotenv.config();
 
-// Initialize Google Antigravity / Gemini API client if GEMINI_API_KEY is configured
-const apiKey = process.env.GEMINI_API_KEY || process.env.API_KEY || '';
+const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || process.env.API_KEY || '';
 let genAI = null;
 if (apiKey) {
   try {
@@ -32,7 +31,7 @@ export async function parseAnnouncementWithAgent(rawText) {
   // Try Gemini API if key is present
   if (genAI) {
     try {
-      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash-latest' });
       const prompt = `You are an academic NLP parser inside Pulse AI. Extract JSON metadata from this announcement text:
 Text: "${rawText}"
 
